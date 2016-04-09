@@ -12,17 +12,12 @@ def gcd(a, b):
     return d
 
 def lcm(a, b):
-    i = 1
-    m = max(a, b)
-    g = gcd(a,b)
-    multi = a * b
-    while m * g != multi:
-        m += m
-    return m
+    return (a*b)//gcd(a,b)
 
 if __name__ == '__main__':
-    #a, b = map(int, input().split())
-    #print(lcm(a, b))
+    a, b = map(int, input().split())
+    print(lcm(a, b))
+    """
     while True:
         a = random.randint(1, 2000000000)
         b = random.randint(1, 2000000000)
@@ -34,3 +29,4 @@ if __name__ == '__main__':
         else:
             print("{}, {}: lcm({}), gcd({}), mult({})".format(a,b,l,g,m))
             break
+    """

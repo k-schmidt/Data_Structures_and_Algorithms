@@ -77,74 +77,6 @@ Unlike an arry in which the linear order is determined by the array indices, the
     + Circular?
         + The *prev* pointer of the head of the list points to the tail, and the *next* pointer of the tail of the list points to the head.
 
-``` python
-## Unsorted Doubly Linked List
-
-class Node:
-
-    def __init__(self, data=None, next_node=None, prev_node=None):
-        self.data = data
-        self.next_node = next_node
-        self.prev_node = prev_node
-
-    def get_data(self):
-        return self.data
-
-    def get_next(self):
-        return self.next_node
-
-    def get_previous(self):
-        return self.prev_node
-
-    def set_next(self, new_next):
-        self.next_node = new_next
-
-    def set_prev(self, new_prev):
-        self.prev_node = new_prev
-
-
-class LinkedList:
-
-    def __init__(self, head=None):
-        self.head = head
-        self.size  = 0
-
-    def get_size(self):
-        return self.size
-
-    def search(self, k):
-        x = self.head
-        while x is not None and x.data != k:
-            x = x.next_node
-        return x
-
-    def insert(self, new_head):
-        new_node = Node(new_head)
-        new_node.set_next(self.head)
-        if self.head is not None:
-            self.head.set_prev(new_node)
-        self.head = new_node
-        new_node.set_prev(None)
-        self.size += 1
-
-    def delete(self, x=None):
-        if self.head is None:
-            raise Exception("underflow")
-        elif x is None:
-            self.head = self.head.next_node
-            if self.head is not None:
-                self.head.prev_node = None
-        else:
-            node = self.search(x)
-            if node.prev_node is not None:
-                node.prev_node.next_node = node.next_node
-            else:
-                self.head = node.next_node
-                self.head.prev_node = None
-            if node.next_node is not None:
-                node.next_node.prev_node = node.prev_node
-```
-
 
 ``` python
 ## LinkedStack
@@ -231,3 +163,23 @@ class LinkedQueue
             self.tail = None
         return answer
 ```
+
+## Representing Rooted Trees
+We represent each node of a tree by an object.
+As with linked lists, we assume that each node contains a *key* attribute.
+The remaining attributes of interest are pointers to other nodes, and they vary according to the type of tree.
+
+**Binary trees**
+Each node has *p*, *left*, and *right* to store pointers to the parent, left child, and right child.
+If `x.p = NIL`, then x is the root.
+If node x has no left child, then `x.left = NIL`, and similarly for the right child.
+The root of the entire tree T is pointed to by the attribute `T.root`. If `T.root = NIL`, then the tree is empty.
+
+**Rooted trees with unbounded branching**
+The **left-child, right-sibling representation** has the advantage of using only O(n) space for any n-node rooted tree.
+As before, each node contains a parent pointer `p`, and T.root points to the root of tree T.
+Instead of having a pointer to each of its children, however, each node x has only two pointers:
+1. `x.left-child` points to the leftmost child of node x, and
+2. `x.right-sibling` points to the sibling of x immediately to its right.
+
+If nod x has no children, then `x.left-child = NIL` and if node x is the rightmost child of its parent, then `x.right-sibling = NIL`.

@@ -179,6 +179,7 @@ The root of the entire tree T is pointed to by the attribute `T.root`. If `T.roo
 The **left-child, right-sibling representation** has the advantage of using only O(n) space for any n-node rooted tree.
 As before, each node contains a parent pointer `p`, and T.root points to the root of tree T.
 Instead of having a pointer to each of its children, however, each node x has only two pointers:
+
 1. `x.left-child` points to the leftmost child of node x, and
 2. `x.right-sibling` points to the sibling of x immediately to its right.
 

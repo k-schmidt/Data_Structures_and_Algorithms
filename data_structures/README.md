@@ -64,7 +64,23 @@ class Queue:
 ```
 
 **Linked List:** a data structure in which the objects are arranged in a linear order.
-Unlike an arry in which the linear order is determined by the array indices, the order in a linked list is determined by a pointer in each object.
+Unlike an array in which the linear order is determined by the array indices, the order in a linked list is determined by a pointer in each object.
+
+Each element (we will call it a **node**) of a list is comprising of two items - the data and a reference to the next node.
+The last node has a reference to null.
+The entry point into a linked list is called the **head** of the list.
+It should be noted that head is not a separate node, but the reference to the first node.
+If the list is empty then the head is a null reference.
+
+A linked list is a dynamic data structure. The number of nodes in a list is not fixed and can grow and shrink on demand.
+**Any application which has to deal with an unknown number of objects will need to use a linked list.**
+
+One **disadvantage** of a linked list against an array is that it does not allow direct access to the individual elemants. If you want to access a particular item then you have to start at the head and follow the references until you get to that item. O(n)
+
+Another **disadvantage** is that a linked list uses more memory compare with an array - extra 4 bytes to store a reference to the next node.
+
+A **doubly linked list** is a list that has two references, one to the next node and another to previous node.
+A **circular linked list** is a list where the last node of the list points back to the first node (or head) of the list.
 
 **Forms:**
 + Either singly linked or doubly linked
@@ -164,6 +180,75 @@ class LinkedQueue
         return answer
 ```
 
+``` python
+class LinkedList:
+
+    class Node:
+
+        def __init__(self, data, next_node=None):
+            self.data = data
+            self.next_node = next_node
+
+    def __init__(self):
+        self.head = None
+        self.size = 0
+
+    def add_first(self, x):
+        self.head = self.Node(x, self.head)
+
+    def iterate(self):
+        if self.head is None:
+            return
+        node = self.head
+        while node.data is not None:
+            node = node.next_node
+
+    def add_last(self, x):
+        if self.head is None:
+            self.add_first(x)
+        else:
+            tmp = self.head
+            while tmp.data is not None:
+                tmp = tmp.next_node
+            tmp.next_node = self.Node(x)
+
+    def insert_after(self, key, x):
+        tmp = self.head
+        while tmp is not None and tmp.data != key:
+            tmp = tmp.next_node
+        if tmp is not None:
+            tmp.next_node = Node(x, tmp.next_node)
+
+    def insert_before(self, key, x):
+        if self.head is None:
+            return
+        if self.head.data == key:
+            self.add_first(x)
+            return
+        tmp = self.head
+        prv = None
+        while tmp is not None and tmp.data != key:
+            prv = tmp
+            tmp = tmp.next_node
+        if tmp is not None:
+            prv.next_node = self.Node(x, tmp)
+
+    def delete(self, key):
+        if self.head is None:
+            raise Exception("underflow")
+        if self.head.data == key:
+            self.head = self.head.next_node
+            return
+        tmp = self.head
+        prv = None
+        while tmp is not None and tmp.data != key:
+            prv = tmp
+            tmp = tmp.next_node
+        if tmp is None:
+            raise Exception("underflow")
+        prv.next_node = tmp.next_node
+```
+
 ## Representing Rooted Trees
 We represent each node of a tree by an object.
 As with linked lists, we assume that each node contains a *key* attribute.
@@ -184,4 +269,4 @@ Instead of having a pointer to each of its children, however, each node x has on
 1. `x.left-child` points to the leftmost child of node x, and
 2. `x.right-sibling` points to the sibling of x immediately to its right.
 
-If nod x has no children, then `x.left-child = NIL` and if node x is the rightmost child of its parent, then `x.right-sibling = NIL`.
+If node x has no children, then `x.left-child = NIL` and if node x is the rightmost child of its parent, then `x.right-sibling = NIL`.

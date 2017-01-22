@@ -2,7 +2,23 @@
 
 ## Definition
 
-Recursion is a method of solving problems that involves breaking a problem down into smaller and smaller subproblems until you get to a small enough problem that it can be solved trivially. Usually recursion involves a function calling itself.
+Recursion is a method of solving problems that involves breaking a problem down into smaller and smaller subproblems until you get to a small enough problem that it can be solved trivially. Usually recursion involves a function calling itself. Each recursive call adds a new layer to the stack. If your algorithm recurses to a depth of n, it uses at least O(n) memory.
+
+## How to Approach
+### Bottom-Up Approach
+Start with knowing how to solve the problem for the simple case, like a list with only one element.
+Then we figure out how to solve the problem for two elements, then for three elements, and so on.
+Think about how you can *build* the solution for one case off of the previous case (or multiple previous cases).
+
+### Top-Down Approach
+Think about how we can divide the problem for case N into subproblems.
+Be careful of overlap between cases.
+
+### Half-and-Half Approach
+Often effective to divide the dataset in half.
+Binary search, for example, uses a half-and-half approach.
+When we look for an element in a sorted array, we first figure out which half of the array contains the value.
+Then recurse and search.
 
 ## Example
 
@@ -26,7 +42,7 @@ def listsum(numlist):
 Each time we make a recursive call we are solving a smaller problem, until we reach the point where the problem cannot get any smaller.
 
 
-## The Tree Laws of Recursion
+## The Three Laws of Recursion
 
 1. A recursive algorithm must have a **base case**.
 2. A recursive algorithm must change its state and move toward the base case.

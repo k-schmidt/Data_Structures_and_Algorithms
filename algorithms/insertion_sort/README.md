@@ -14,6 +14,19 @@ for j = 2 to A.length:
     A[i + 1] = key
 ```
 
+``` python
+def selectionSort(alist):
+    for fillslot in range(len(alist)-1, 0, -1):
+        positionOfMax = 0
+        for location in range(1, fillslot+1):
+            if alist[location] > alist[positionOfMax]:
+                positionOfMax = location
+
+        temp = alist[fillslot]
+        alist[fillslot] = alist[positionOfMax]
+        alist[positionOfMax] = temp
+```
+
 ## Loop Invariants
 At the start of each iteration of the **for** loop, the subarray A[1..j-1] consists of the elements originally in A[1..j-1], but in sorted order.
 

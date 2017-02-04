@@ -107,7 +107,7 @@ HEAPSORT(A)
         MAX-HEAPIFY(A, 1)
 ```
 
-The **Heapsort** procedure takes **O(nlgn)**, since the call to BUILD-MAX-HEAP takes time O(n) and each of the n - 1 calls to MAX-HEAPIFY takes O(lgn).
+The **Heapsort** procedure takes **O(nlgn)**, since the call to BUILD-MAX-HEAP takes time O(nlogn) and each of the n - 1 calls to MAX-HEAPIFY takes O(lgn).
 
 ## Priority Queues
 

@@ -15,7 +15,7 @@
 + **Algorithms**
     + Breadth-First Search
     + Depth-First Search
-    + Binary Search
+    + [Binary Search](./data_structures/arrays/code_rust/binary_search/README.md)
     + [Merge Sort](./algorithms/merge_sort/README.md)
     + Quick Sort
 + **Concepts**

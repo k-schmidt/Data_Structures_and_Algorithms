@@ -81,7 +81,7 @@ Applications have diverse attributes.
 + Is your array randomly ordered?
 + Need guaranteed performance?
 
-[Sorting Summary](./algorithms/sorting_summary.png)
+![Sorting Summary](./algorithms/sorting_summary.png)
 
 ### Selection Sort
 

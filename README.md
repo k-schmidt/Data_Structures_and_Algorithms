@@ -206,3 +206,153 @@ Implementation:
    + `(a[i] < v)`: exchange `a[lt]` with `a[i]`; increment both `lt` and `i`
    + `(a[i] > v)`: exchange `a[gt]` with `a[gt]`; decrement `gt`
    + `(a[i] == v)`: increment `i`
+
+### Priority Queues
+
+Remove (find) the largest (or smallest) item.
+
+
+Typical constraint is that there is not enough memory to store **N** items
+
+#### Priority Queue API
+
+1. MaxPQ()
+   + Create an empty priority queue
+2. insert(value)
+   + Insert a key into the priority queue
+3. delMax()
+   + Return and remove the largest key
+4. isEmpty()
+   + is the priority queue empty?
+
+#### Find the largest M Items in a Stream of N Items
+
+``` java
+// Use a min priority queue
+MinPQ<Transaction> pq = new MinPQ<Transaction>();
+
+while (STdIn.hasNextLine())
+{
+    String line = StdIn.readLine();
+    Transaction item = new Transaction(line);
+    pq.insert(item);
+    if (pq.size() > M)  // pq contains largest M items
+        pq.delMin();
+}
+```
+
+
+1. Sorting the N items would take `NlogN` time and `N` space
+2. Using an **elementary priority queue** takes `MN` time and `M` space
+3. **Best in practice** is to use a **Binary Heap** which would take `NlogM` time and `M` space
+4. Best in theory is `N` time and `M` space
+
+### Binary Heaps
+
+Implements all operations of priority queues efficiently.
+
+
+1. Binary Tree
+   + Empty or Node with links to left and right Binary trees
+2. Complete Tree
+   + Perfectly balanced, except for bottom level
+   + **Property**
+     + Height of complete tree with `N` nodes is `logN`
+       + Height only increases when `N` is a power of 2.
+
+#### Binary Heap Representations
+
+##### Heap-ordered binary tree
+1. Keys in nodes.
+2. Parent's key no smaller than children's key
+
+##### Array Representation
+1. Indices start at 1
+2. Take nodes in level order
+3. No explicit links needed
+
+#### Binary Heap Properties
+
+1. Largest key is `a[1]` which is root of binary tree
+2. Can use array indices to move through tree.
+   + Parent of node at `k` is at `k/2`
+   + Children of node at `k` are at `2k` and `2k+1`
+
+#### Promotion in a Heap
+
+##### Child's key becomes larger than it's parent's key
+
+1. Exchange the key in child with the key in parent.
+2. Repeat until heap order is restored.
+
+#### Demotion in a Heap
+
+##### Parent's key becomes smaller than one (or both) of its children
+
+1. Exchange key in parent with key in larger child.
+2. Repeat until heap order is restored.
+
+#### Delete the maximum in a heap
+
+1. Exchange root with node at the end and pop it off the heap.
+2. Demote the node until heap order is restored.
+
+
+**Cost**: At most `2logN` compares.
+
+#### Binary Heap Considerations
+
+1. Immutability of keys
+2. Underflow and Overflow
+   + Throw exception if deleting from empty Priority Queue
+   + Throw exception if adding to a max-out Priority Queue
+3. Minimum-oriented priority queue
+   + Replace `less()` with `greater()`
+   + Implement `greater()`
+4. How would you implement remove an arbitrary item?
+5. How would you implement change the priority of an item?
+
+### Heapsort
+
+1. Create Max-Heap with all N keys
+2. Repeatedly remove the maximum key using the Delete Maximum in a heap method defined two sections ago.
+
+#### Heap Construction
+Build heap using bottom-up method
+
+``` java
+for (int k = N/2; k >= 1; k--)
+    sink(a, k, N);
+```
+
+#### Sortdown
+1. Remove the maximum, one at a time.
+2. Leave in array, instead of nulling out.
+
+``` java
+while (N > 1)
+{
+    exch(a, 1, N--);
+    sink(a, 1, N);
+}
+```
+
+#### Mathematical Analysis
++ Heap construction uses `<= 2N` compares and exchanges.
++ Heapsort uses `<= 2NlogN` compares and exchanges.
+
+
+This is significant because it is an **in-place** algorithm with `NlogN` worst-case.
+
+
++ **Mergesort**: required linear extra space
++ **Quicksort**: quadratic time in the worst case
+
+
+Heapsort is optimal for both time and space but:
+
+
++ Inner loop is longer than quicksort's
++ Makes poor use of cache memory
+  + Has no local memory reference
++ Not stable.

@@ -247,6 +247,8 @@ while (STdIn.hasNextLine())
 3. **Best in practice** is to use a **Binary Heap** which would take `NlogM` time and `M` space
 4. Best in theory is `N` time and `M` space
 
+![](./algorithms/priority_queues.png)
+
 ### Binary Heaps
 
 Implements all operations of priority queues efficiently.
@@ -356,3 +358,5 @@ Heapsort is optimal for both time and space but:
 + Makes poor use of cache memory
   + Has no local memory reference
 + Not stable.
+
+![](./algorithms/sorting_algorithms_summary.png)
